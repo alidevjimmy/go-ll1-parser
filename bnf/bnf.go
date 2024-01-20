@@ -38,11 +38,16 @@ func NewBnf(reader io.Reader) (*Bnf, error) {
 		}
 		nonterm, term := strings.TrimSpace(gram[0]), strings.TrimSpace(gram[1])
 		prods := strings.Split(term, "|")
+		
 		bnf.Grammar[nonterm] = make([][]string, len(prods))
+		
 		for k, p := range prods {
 			p = strings.TrimSpace(p)
 			prod := strings.Split(p, " ")
-			bnf.Grammar[nonterm][k] = append(bnf.Grammar[nonterm][k], prod...)
+			for _, pp := range prod {
+				pp = strings.Replace(pp, "\"", "", -1)
+				bnf.Grammar[nonterm][k] = append(bnf.Grammar[nonterm][k], pp)
+			}
 		}
 	}
 	return bnf, nil

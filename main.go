@@ -15,11 +15,12 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	
 	bnf, err := bnf.NewBnf(fileio)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	parser := ll1.NewLL1Parser(bnf.Grammar, "<E>", "ε")
+	parser := ll1.NewLL1Parser(bnf.Grammar, "<palindrome>", "ε")
 
 	tokensByte, err := os.ReadFile("Test_X.txt")
 	if err != nil {

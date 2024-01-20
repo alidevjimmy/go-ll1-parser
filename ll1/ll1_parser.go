@@ -26,6 +26,11 @@ func NewLL1Parser(grammar bnf.Grammar, startSymbol string, epsilon string) *LL1P
 		parseTable:  make(map[string]map[string][]string),
 	}
 
+	fmt.Println("Grammar:")
+	for nonterm, term := range parser.grammar {
+		fmt.Println(nonterm, "::=", term)
+	}
+
 	parser.calculateSets()
 
 	parser.buildParseTable()
